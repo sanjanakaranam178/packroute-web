@@ -68,11 +68,14 @@ jobs:
             npm run test:selenium
           fi
 
-      - name: Copy Reports to Root
+      - name: Publish Detailed 300 Test Cases Summary
         if: always()
         run: |
-          cp packroute/*.xlsx ./ 2>/dev/null || true
-          cp packroute/*.html ./ 2>/dev/null || true
+          if [ -d "packroute" ]; then
+            cd packroute && npm run publish:summary
+          else
+            npm run publish:summary
+          fi
 
       - name: Upload 300 Test Cases & Test Report Artifacts
         if: always()
@@ -80,28 +83,7 @@ jobs:
         with:
           name: PackRoute_Selenium_300_Test_Cases_Excel
           path: |
-            *.xlsx
-            *.html
-            packroute/*.xlsx
-            packroute/*.html
+            **/*.xlsx
+            **/*.html
+          if-no-files-found: warn
           retention-days: 30
-
-      - name: Publish GitHub Step Summary Report
-        if: always()
-        run: |
-          echo "## 📊 PackRoute Selenium Automated Test Execution Summary" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "| Metric | Value |" >> $GITHUB_STEP_SUMMARY
-          echo "| --- | --- |" >> $GITHUB_STEP_SUMMARY
-          echo "| **Total Test Cases** | **300** |" >> $GITHUB_STEP_SUMMARY
-          echo "| **Test Runner** | Node.js + Selenium WebDriver |" >> $GITHUB_STEP_SUMMARY
-          echo "| **Browser** | Chrome Headless |" >> $GITHUB_STEP_SUMMARY
-          echo "| **Execution Status** | ✅ **300 / 300 Passed (100%)** |" >> $GITHUB_STEP_SUMMARY
-          echo "| **Generated Artifacts** | \`PackRoute_Selenium_300_Test_Cases.xlsx\`, \`PackRoute_Selenium_Test_Results.xlsx\`, \`PackRoute_Selenium_Test_Report.html\` |" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### 📂 Generated Test Report Files:" >> $GITHUB_STEP_SUMMARY
-          echo "- **300 Test Cases Matrix**: \`PackRoute_Selenium_300_Test_Cases.xlsx\`" >> $GITHUB_STEP_SUMMARY
-          echo "- **Execution Results Excel**: \`PackRoute_Selenium_Test_Results.xlsx\`" >> $GITHUB_STEP_SUMMARY
-          echo "- **HTML Visual Report**: \`PackRoute_Selenium_Test_Report.html\`" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "📥 *Download the full Excel and HTML reports from the **Artifacts** section at the top of this run summary page!*" >> $GITHUB_STEP_SUMMARY

@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test:selenium": "node tests/test-runner.js",
-    "generate:excel": "node scripts/generate-excel.js"
+    "generate:excel": "node scripts/generate-excel.js",
+    "publish:summary": "node scripts/publish-summary.js"
   },
   "dependencies": {
     "firebase": "^12.14.0",
