@@ -19,13 +19,16 @@ jobs:
       - name: Setup Node.js Environment
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
-      - name: Install Google Chrome & ChromeDriver
+      - name: Setup Google Chrome Browser
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+
+      - name: Verify Chrome & Driver
         run: |
-          sudo apt-get update
-          sudo apt-get install -y wget curl unzip libxi6 libgconf-2-4 libnss3 chromium-browser
-          google-chrome --version || chromium-browser --version
+          google-chrome --version || chromium-browser --version || true
 
       - name: Install Dependencies
         run: |
@@ -50,7 +53,7 @@ jobs:
           else
             npx vite --port 5173 --host 0.0.0.0 &
           fi
-          sleep 5
+          sleep 4
           curl -I http://localhost:5173 || true
 
       - name: Execute Selenium Node.js Test Suite
@@ -66,6 +69,7 @@ jobs:
           fi
 
       - name: Upload 300 Test Cases Excel Artifact
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: PackRoute_Selenium_300_Test_Cases_Excel
