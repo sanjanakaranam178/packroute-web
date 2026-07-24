@@ -316,8 +316,13 @@ wsCases['!cols'] = [
 
 XLSX.utils.book_append_sheet(wb, wsCases, "300 Test Cases");
 
-// Save Excel file to Root directory and outputs folder
-const targetPath = path.resolve(__dirname, "..", "PackRoute_Selenium_300_Test_Cases.xlsx");
-XLSX.writeFile(wb, targetPath);
+// Save Excel file to local directory and parent root
+const targetPath1 = path.resolve(__dirname, "..", "PackRoute_Selenium_300_Test_Cases.xlsx");
+const targetPath2 = path.resolve(process.cwd(), "PackRoute_Selenium_300_Test_Cases.xlsx");
+const targetPath3 = path.resolve(__dirname, "..", "..", "PackRoute_Selenium_300_Test_Cases.xlsx");
 
-console.log(`✅ PackRoute 300 Test Cases Excel successfully created at: ${targetPath}`);
+XLSX.writeFile(wb, targetPath1);
+try { XLSX.writeFile(wb, targetPath2); } catch (e) {}
+try { XLSX.writeFile(wb, targetPath3); } catch (e) {}
+
+console.log(`✅ PackRoute 300 Test Cases Excel successfully created at: ${targetPath1}`);
