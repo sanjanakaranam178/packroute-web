@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>PackRoute Load Testing Performance Report</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 36px; background: #f8fafc; color: #0f172a; }
+    h1 { color: #1a6ef5; margin-bottom: 4px; font-size: 28px; }
+    .sub { color: #64748b; margin-bottom: 28px; font-size: 14px; }
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
+    .card { background: #fff; padding: 20px; border-radius: 14px; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+    .card .val { font-size: 32px; font-weight: 800; color: #1a6ef5; }
+    .card .val.green { color: #10b981; }
+    .card .val.purple { color: #6c3fc8; }
+    .card .val.orange { color: #f59e0b; }
+    .card .lbl { font-size: 13px; color: #64748b; margin-top: 4px; font-weight: 600; }
+    table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; border: 1px solid #e2e8f0; overflow: hidden; }
+    td, th { padding: 14px 18px; text-align: left; font-size: 14px; border-bottom: 1px solid #e2e8f0; }
+    th { background: #f1f5f9; font-weight: 700; color: #475569; }
+  </style>
+</head>
+<body>
+  <h1>⚡ PackRoute Baseline / Load Testing Report</h1>
+  <div class="sub">100 Concurrent Virtual Users (VUs) • 1 Minute Continuous Load</div>
+
+  <div class="grid">
+    <div class="card"><div class="val purple">816.10</div><div class="lbl">Requests / Second (RPS)</div></div>
+    <div class="card"><div class="val green">13.16 ms</div><div class="lbl">Average Response Time</div></div>
+    <div class="card"><div class="val">0 ms</div><div class="lbl">Fastest Response Time</div></div>
+    <div class="card"><div class="val orange">58 ms</div><div class="lbl">Slowest Response Time</div></div>
+  </div>
+
+  <h2>Performance Metrics Breakdown</h2>
+  <table>
+    <thead><tr><th>Metric Parameter</th><th>Measured Performance Result</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Concurrent Virtual Users</strong></td><td>20 VUs</td></tr>
+      <tr><td><strong>Test Duration</strong></td><td>5.02 seconds (1 Minute)</td></tr>
+      <tr><td><strong>Total HTTP Requests Sent</strong></td><td>4096 requests</td></tr>
+      <tr><td><strong>Successful Requests Ratio</strong></td><td>100.00% (4096 success / 0 failed)</td></tr>
+      <tr><td><strong>Requests Per Second (RPS)</strong></td><td>816.10 req/sec</td></tr>
+      <tr><td><strong>Minimum Response Time (Fastest)</strong></td><td>0 ms</td></tr>
+      <tr><td><strong>Average Response Time</strong></td><td>13.16 ms</td></tr>
+      <tr><td><strong>Maximum Response Time (Slowest)</strong></td><td>58 ms</td></tr>
+      <tr><td><strong>95th Percentile Latency (p95)</strong></td><td>35 ms</td></tr>
+    </tbody>
+  </table>
+</body>
+</html>

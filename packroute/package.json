@@ -10,6 +10,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test:selenium": "node tests/test-runner.js",
+    "test:load": "node tests/load-runner.js",
     "generate:excel": "node scripts/generate-excel.js",
     "publish:summary": "node scripts/publish-summary.js"
   },

@@ -1,0 +1,13 @@
+{
+  "virtualUsers": 20,
+  "durationSec": "5.02",
+  "totalRequests": 4096,
+  "successRequests": 4096,
+  "failedRequests": 0,
+  "rps": "816.10",
+  "successRate": "100.00",
+  "minTime": 0,
+  "maxTime": 58,
+  "avgTime": "13.16",
+  "p95Time": 35
+}

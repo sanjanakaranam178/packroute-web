@@ -1,4 +1,4 @@
-name: PackRoute Selenium Automated Tests (300 Test Cases)
+name: PackRoute Selenium Automated & Load Tests (300 Test Cases + 100 VUs)
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
 
 jobs:
   selenium-tests:
-    name: Run Selenium Node.js Tests & Export Excel Report
+    name: Run Selenium Node.js Tests & 100 VU Load Test
     runs-on: ubuntu-latest
 
     steps:
@@ -53,16 +53,24 @@ jobs:
           CI: "true"
         run: npm run test:selenium
 
-      - name: Publish Detailed 300 Test Cases Summary
+      - name: Run 100 VU Load Testing (1 Minute)
+        working-directory: packroute
+        env:
+          VIRTUAL_USERS: "100"
+          DURATION_SECONDS: "60"
+          TEST_BASE_URL: "http://localhost:5173"
+        run: npm run test:load
+
+      - name: Publish Detailed Summary Report
         if: always()
         working-directory: packroute
         run: npm run publish:summary
 
-      - name: Upload 300 Test Cases & Test Report Artifacts
+      - name: Upload Test Artifacts (Excel & HTML Reports)
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: PackRoute_Selenium_300_Test_Cases_Excel
+          name: PackRoute_Test_and_Load_Reports
           path: |
             **/*.xlsx
             **/*.html
